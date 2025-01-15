@@ -24,7 +24,7 @@ const baseQuery = fetchBaseQuery({
     },
 });
 
-const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, customError> = async (args, api, extraOptions) => {
+export const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, customError> = async (args, api, extraOptions) => {
     let result = await baseQuery(args, api, extraOptions);
 
     if (result.error && result.error.status === 401) {
@@ -94,6 +94,20 @@ export const userApi = createApi({
                 headers: getHeaders(),
             }),
         }),
+        getMentors: query<ProfileResponseType, void>({
+            query: () => ({
+                url: `/users?role=mentor`,
+                method: "GET",
+                headers: getHeaders(),
+            }),
+        }),
+        getYouth: query<ProfileResponseType, void>({
+            query: () => ({
+                url: `/users?role=youth`,
+                method: "GET",
+                headers: getHeaders(),
+            }),
+        }),
         deleteUser: mutation<ProfileResponseType, number>({
             query: (userId) => ({
                 url: `/users/${userId}`,
@@ -108,5 +122,7 @@ export const {
     useLoginMutation,
     useRegisterMutation,
     useGetAllUsersQuery,
+    useGetMentorsQuery,
+    useGetYouthQuery,
     useDeleteUserMutation
 } = userApi
