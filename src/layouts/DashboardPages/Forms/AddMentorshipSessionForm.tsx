@@ -1,8 +1,8 @@
 import React from 'react';
 import { Modal, Descriptions, Button, Space, Popconfirm, Tag } from 'antd';
-import { MentorshipSession } from '../../services/types/mentorship';
+import { MentorshipSession } from '../../../services/types/mentorship';
 import { format } from 'date-fns';
-import { useDeleteMentorshipSessionMutation } from '../../services/mentorshipSessions';
+import { useDeleteMentorshipSessionMutation } from '../../../services/mentorshipSessions';
 
 interface MentorshipSessionDetailsProps {
   session: MentorshipSession | null;
@@ -12,12 +12,11 @@ interface MentorshipSessionDetailsProps {
   userRole: 'mentor' | 'youth';
 }
 
-const MentorshipSessionDetails: React.FC<MentorshipSessionDetailsProps> = ({
+const AddMentorshipSessionForm: React.FC<MentorshipSessionDetailsProps> = ({
   session,
   visible,
   onClose,
   onEdit,
-  userRole,
 }) => {
   const [deleteSession] = useDeleteMentorshipSessionMutation();
 
@@ -93,4 +92,4 @@ const MentorshipSessionDetails: React.FC<MentorshipSessionDetailsProps> = ({
   );
 };
 
-export default MentorshipSessionDetails;
+export default AddMentorshipSessionForm;

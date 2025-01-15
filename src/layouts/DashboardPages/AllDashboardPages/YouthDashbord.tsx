@@ -14,6 +14,7 @@ import Loader from "../../loader";
 import { useGetUserProfileQuery } from "../../../services/profiles";
 import Chat from "../../../components/secondary/Chat";
 import { toast } from "react-toastify";
+import MentorshipCalendar from "../../../components/secondary/Calendar";
 
 const YouthDashboardPage = () => {
   const { data: notificationsData, isLoading } = useGetNotificationsQuery();
@@ -132,7 +133,7 @@ const YouthDashboardPage = () => {
         {/* Activity Calendar and Chats */}
         <div className="sm:w-4/12">
           <Card title="Activity Calendar" className="shadow-sm mb-1">
-            <Calendar fullscreen={false} />
+            <MentorshipCalendar />
           </Card>
 
           {/* Chats */}
