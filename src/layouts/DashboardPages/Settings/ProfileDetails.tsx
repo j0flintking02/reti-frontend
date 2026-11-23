@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Tag, Button, Modal, Form, Input, Select } from "antd";
-import { EditOutlined, UserOutlined, EnvironmentOutlined, TeamOutlined, ToolOutlined } from "@ant-design/icons";
+import { EditOutlined, UserOutlined, EnvironmentOutlined, TeamOutlined } from "@ant-design/icons";
 import { loginDetails } from "../../../utils";
 
 const { Option } = Select;
@@ -12,7 +12,6 @@ const ProfileDetails = ({ profileData }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingType, setEditingType] = useState<
     | "skillsAndTraining"
-    | "artisanDetails"
     | "geoLocationDetails"
     | "participantDetails"
   >("skillsAndTraining");
@@ -23,14 +22,6 @@ const ProfileDetails = ({ profileData }) => {
       traineeCategory: "Not specified",
       trainingDuration: "Not specified",
       trainingLocation: "Not specified",
-    },
-    artisanDetails: {
-      categoryOfArtisan: "Not specified",
-      nameOfHost: "Not specified",
-      villageOfArtisan: "Not specified",
-      subcountyOfArtisan: "Not specified",
-      centerRefugeeSettlement: "Not specified",
-      hostContact: "Not specified",
     },
     geoLocationDetails: {
       partnerResponsible: "Not specified",
@@ -66,14 +57,6 @@ const ProfileDetails = ({ profileData }) => {
           traineeCategory: profileData?.data?.skillsAndTraining?.traineeCategory || "Not specified",
           trainingDuration: profileData?.data?.skillsAndTraining?.trainingDuration || "Not specified",
           trainingLocation: profileData?.data?.skillsAndTraining?.trainingLocation || "Not specified",
-        },
-        artisanDetails: {
-          categoryOfArtisan: profileData?.data?.artisanDetails?.categoryOfArtisan || "Not specified",
-          nameOfHost: profileData?.data?.artisanDetails?.nameOfHost || "Not specified",
-          villageOfArtisan: profileData?.data?.artisanDetails?.villageOfArtisan || "Not specified",
-          subcountyOfArtisan: profileData?.data?.artisanDetails?.subcountyOfArtisan || "Not specified",
-          centerRefugeeSettlement: profileData?.data?.artisanDetails?.centerRefugeeSettlement || "Not specified",
-          hostContact: profileData?.data?.artisanDetails?.hostContact || "Not specified",
         },
         geoLocationDetails: {
           partnerResponsible: profileData?.data?.geoLocationDetails?.partnerResponsible || "Not specified",
@@ -148,30 +131,6 @@ const ProfileDetails = ({ profileData }) => {
           </div>
         </div>
 
-        {/* Artisan Details */}
-        <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold flex items-center gap-2">
-              <ToolOutlined className="text-green-500" />
-              Artisan Details
-            </h2>
-            {isAdmin && (
-            <EditOutlined 
-              className="cursor-pointer text-blue-500 hover:text-blue-700"
-              onClick={() => openEditModal("artisanDetails")}
-            />
-            )}
-          </div>
-          <div className="space-y-3">
-            {Object.entries(details.artisanDetails).map(([key, value]) => (
-              <div key={key} className="flex justify-between items-start border-b pb-2">
-                <span className="text-gray-600 capitalize">{key.replace(/([A-Z])/g, ' $1').toLowerCase()}:</span>
-                <span className="text-gray-800 font-medium">{value || 'Not specified'}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
         {/* Geographical Location */}
         <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
           <div className="flex items-center justify-between mb-4">
@@ -232,20 +191,6 @@ const ProfileDetails = ({ profileData }) => {
         <Form form={form} layout="vertical" onFinish={handleSave}>
           {editingType === "skillsAndTraining" &&
             Object.entries(details.skillsAndTraining).map(([key, value]) => (
-              <Form.Item
-                key={key}
-                label={key
-                  .replace(/([A-Z])/g, " $1")
-                  .replace(/^./, (str) => str.toUpperCase())}
-                name={key}
-                initialValue={value}
-                rules={[{ required: true, message: `Please enter ${key}` }]}
-              >
-                <Input placeholder={`Enter ${key}`} />
-              </Form.Item>
-            ))}
-          {editingType === "artisanDetails" &&
-            Object.entries(details.artisanDetails).map(([key, value]) => (
               <Form.Item
                 key={key}
                 label={key

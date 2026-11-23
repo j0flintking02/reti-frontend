@@ -163,14 +163,6 @@ export const handleDownloadData = (data: any) => {
   addText(`Training Duration: ${userProfile?.skillsAndTraining?.trainingDuration || "N/A"}`, margin, currentY);
   addText(`Training Location: ${userProfile?.skillsAndTraining?.trainingLocation || "N/A"}`, margin, currentY);
 
-  addSectionHeader("Artisan Details");
-  addText(`Category of Artisan: ${userProfile?.artisanDetails?.categoryOfArtisan || "N/A"}`, margin, currentY);
-  addText(`Name of Host: ${userProfile?.artisanDetails?.nameOfHost || "N/A"}`, margin, currentY);
-  addText(`Village of Artisan: ${userProfile?.artisanDetails?.villageOfArtisan || "N/A"}`, margin, currentY);
-  addText(`SubCounty of Artisan: ${userProfile?.artisanDetails?.subcountyOfArtisan || "N/A"}`, margin, currentY);
-  addText(`Center Refugee Settlement: ${userProfile?.artisanDetails?.centerRefugeeSettlement || "N/A"}`, margin, currentY);
-  addText(`Host Contact: ${userProfile?.artisanDetails?.hostContact || "N/A"}`, margin, currentY);
-
   addSectionHeader("GeoLocation Details");
   addText(`Partner Responsible: ${userProfile?.geoLocationDetails?.partnerResponsible || "N/A"}`, margin, currentY);
   addText(`Region: ${userProfile?.geoLocationDetails?.region || "N/A"}`, margin, currentY);
